@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+
+  ext_authz:
+    build: ./ext_authz
+    container_name: ext_authz
+
+  envoy:
+    image: envoyproxy/envoy:v1.30-latest
+    container_name: envoy
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+      - "9901:9901"
+    volumes:
+      - /home/msi/zero-trust-demo/envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+      - /home/msi/zero-trust-demo/envoy/tls:/etc/envoy/tls:ro
+
+
+
+
+
